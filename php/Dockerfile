@@ -1,24 +1,24 @@
 FROM php:7.1.6-fpm
 RUN apt-get update && apt-get install -y \
-	libfreetype6 \
-	libjpeg62-turbo \
-	libicu52 \
-	libmcrypt4 \
-	libpng12-0 \
-	libxml2 \
-	libcurl4-openssl-dev \
-	libldap2-dev \
-	libbz2-1.0 \
-	libtidy-0.99-0 \ 
+    libfreetype6 \
+    libjpeg62-turbo \
+    libicu52 \
+    libmcrypt4 \
+    libpng12-0 \
+    libxml2 \
+    libcurl4-openssl-dev \
+    libldap2-dev \
+    libbz2-1.0 \
+    libtidy-0.99-0 \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-	libicu-dev \
+        libicu-dev \
         libmcrypt-dev \
         libpng12-dev \
         libxml2-dev \
         libldap2-dev \
-        libbz2-dev \ 
+        libbz2-dev \
         libtidy-dev \
     && docker-php-ext-install -j$(nproc) dom iconv gettext mysqli bz2 fileinfo hash pcntl shmop mcrypt intl json bcmath mbstring posix tokenizer opcache simplexml xmlrpc xmlrpc xml curl zip soap pdo pdo_mysql session sockets sysvmsg sysvsem sysvshm tidy wddx \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get remove -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-	libicu-dev \
+        libicu-dev \
         libmcrypt-dev \
         libpng12-dev \
         libxml2-dev \
@@ -37,12 +37,12 @@ RUN apt-get update && apt-get install -y \
     && apt-get purge -y \ 
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-	libicu-dev \
+	    libicu-dev \
         libmcrypt-dev \
         libpng12-dev \
         libxml2-dev \
         libldap2-dev \
-        libbz2-dev \ 
+        libbz2-dev \
         libtidy-dev \
     && apt-get clean
     RUN pecl install xdebug && \
