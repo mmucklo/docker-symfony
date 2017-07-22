@@ -51,9 +51,17 @@ RUN apt-get update && apt-get install -y \
     docker-php-ext-enable igbinary && \
     pecl install redis && \
     docker-php-ext-enable redis && \
+    apt-get install -y libmemcached11 libhashkit2 libmemcachedutil2 && \
     apt-get install -y libmemcached-dev && \
     pecl install memcached && \
-    docker-php-ext-enable memcached
+    docker-php-ext-enable memcached && \
+    apt-get remove -y libmemcached-dev && \
+    apt-get install -y libssl-dev && \
+    pecl install mongodb && \
+    docker-php-ext-enable mongodb && \
+    apt-get remove -y libssl-dev && \
+    apt-get autoremove -y && \
+    apt-get clean
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN curl --url https://getcomposer.org/composer.phar -o /usr/local/bin/composer.phar && chmod a+x /usr/local/bin/composer.phar
 ARG XDEBUG_REMOTE_HOST=localhost

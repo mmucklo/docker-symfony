@@ -1,5 +1,7 @@
 version: '3.3'
 services:
+    mongo:
+        image: mongo:3.5
     mysql:
         image: mysql:5.7
         ports:
@@ -16,10 +18,13 @@ services:
                 - "XDEBUG_REMOTE_HOST=${DOCKERHOST}"
         links:
             - mysql
+            - mongo
         volumes:
             - "${SYMFONY_ROOT}:/var/www/symfony"
+        working_dir: /var/www/symfony
         depends_on:
             - mysql
+            - mongo
     nginx:
         image: nginx:1.13.1
         volumes:
