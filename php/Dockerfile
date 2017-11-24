@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libldap2-dev \
     libbz2-1.0 \
     libtidy-0.99-0 \
+    git \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
