@@ -19,12 +19,14 @@ services:
         links:
             - mysql
             - mongo
+            - redis
         volumes:
             - "${SYMFONY_ROOT}:/var/www/symfony"
         working_dir: /var/www/symfony
         depends_on:
             - mysql
             - mongo
+            - redis
     nginx:
         image: nginx:1.13.1
         volumes:
@@ -37,3 +39,5 @@ services:
         depends_on:
             - php
         command: nginx -g 'daemon off;'
+    redis:
+        image: redis:4.0
