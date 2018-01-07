@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libldap2-dev \
     libbz2-1.0 \
     libtidy-0.99-0 \
+    git \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -66,3 +67,4 @@ COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN curl --url https://getcomposer.org/composer.phar -o /usr/local/bin/composer.phar && chmod a+x /usr/local/bin/composer.phar
 ARG XDEBUG_REMOTE_HOST=localhost
 RUN echo xdebug.remote_host=${XDEBUG_REMOTE_HOST} >> /usr/local/etc/php/conf.d/xdebug.ini
+RUN composer.phar self-update
