@@ -1,6 +1,6 @@
 # Dockerfile for Symfony development
 
-Instructions:
+## Getting Started:
 
    * Copy env.sample to .env
    * Edit .env and change SYMFONY_ROOT to the right directory (where you find app/ web/ src/ vendor/ etc.)
