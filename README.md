@@ -20,6 +20,7 @@ Instructions:
 
 # Install symfony
 
+   * mkdir src
    * docker-compose exec php bash
    * cd /var/www
    * composer.phar create-project symfony/website-skeleton symfony
