@@ -10,7 +10,7 @@
 
    * docker-compose up
    * http://localhost:8080/
-      * (or whatever your NGINX_PORT is set to)
+      * (or whatever you set NGINX_PORT to in .env)
       * (If you don't have symfony installed yet, see the [Install symfony](#install-symfony) section)
 
 # Composer
