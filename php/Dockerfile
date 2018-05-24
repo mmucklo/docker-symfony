@@ -1,27 +1,25 @@
-FROM php:7.1-fpm
+FROM php:7.2-fpm
 RUN apt-get update && apt-get install -y \
     libfreetype6 \
     libjpeg62-turbo \
-    libicu52 \
-    libmcrypt4 \
-    libpng12-0 \
+    libicu57 \
+    libpng16-16 \
     libxml2 \
     libcurl4-openssl-dev \
     libldap2-dev \
     libbz2-1.0 \
-    libtidy-0.99-0 \
+    libtidy5 \
     git \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libicu-dev \
-        libmcrypt-dev \
-        libpng12-dev \
+        libpng-dev \
         libxml2-dev \
         libldap2-dev \
         libbz2-dev \
         libtidy-dev \
-    && docker-php-ext-install -j$(nproc) dom iconv gettext mysqli bz2 fileinfo hash pcntl shmop mcrypt intl json bcmath mbstring posix tokenizer opcache simplexml xmlrpc xmlrpc xml curl zip soap pdo pdo_mysql session sockets sysvmsg sysvsem sysvshm tidy wddx \
+    && docker-php-ext-install -j$(nproc) dom iconv gettext mysqli bz2 fileinfo hash pcntl shmop intl json bcmath mbstring posix tokenizer opcache simplexml xmlrpc xmlrpc xml curl zip soap pdo pdo_mysql session sockets sysvmsg sysvsem sysvshm tidy wddx \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd ldap \
@@ -29,8 +27,7 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libicu-dev \
-        libmcrypt-dev \
-        libpng12-dev \
+        libpng-dev \
         libxml2-dev \
         libldap2-dev \
         libbz2-dev \ 
@@ -39,7 +36,6 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
 	    libicu-dev \
-        libmcrypt-dev \
         libpng12-dev \
         libxml2-dev \
         libldap2-dev \
