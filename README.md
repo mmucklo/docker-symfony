@@ -1,4 +1,4 @@
-# Dockerfile for Symfony development
+# Easy Docker setup for Symfony development
 
 ## Getting Started:
 
