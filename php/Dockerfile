@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
         libldap2-dev \
         libbz2-dev \
         libtidy-dev \
-    && docker-php-ext-install -j$(nproc) dom iconv gettext mysqli bz2 fileinfo hash pcntl shmop intl json bcmath mbstring posix tokenizer opcache simplexml xmlrpc xmlrpc xml curl zip soap pdo pdo_mysql session sockets sysvmsg sysvsem sysvshm tidy wddx \
+    && docker-php-ext-install -j$(nproc) dom iconv gettext mysqli bz2 fileinfo hash pcntl shmop intl json bcmath mbstring posix tokenizer opcache simplexml xmlrpc xmlrpc xml curl zip soap pdo pdo_mysql pdo_pgsql pdo_sqlite pgsql session sockets sysvmsg sysvsem sysvshm tidy wddx \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd ldap \
