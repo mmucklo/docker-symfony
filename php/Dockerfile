@@ -9,16 +9,19 @@ RUN apt-get update && apt-get install -y \
     libldap2-dev \
     libbz2-1.0 \
     libtidy5 \
+    sqlite3 \
     git \
     && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libicu-dev \
         libpng-dev \
+        libpq-dev \
         libxml2-dev \
         libldap2-dev \
         libbz2-dev \
         libtidy-dev \
+	libsqlite3-dev \
     && docker-php-ext-install -j$(nproc) dom iconv gettext mysqli bz2 fileinfo hash pcntl shmop intl json bcmath mbstring posix tokenizer opcache simplexml xmlrpc xmlrpc xml curl zip soap pdo pdo_mysql pdo_pgsql pdo_sqlite pgsql session sockets sysvmsg sysvsem sysvshm tidy wddx \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -32,6 +35,7 @@ RUN apt-get update && apt-get install -y \
         libldap2-dev \
         libbz2-dev \ 
         libtidy-dev \
+	libsqlite3-dev \
     && apt-get purge -y \ 
         libfreetype6-dev \
         libjpeg62-turbo-dev \
