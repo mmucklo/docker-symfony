@@ -2,14 +2,14 @@ FROM php:7.3-fpm
 RUN apt update && apt install -y \
     libfreetype6 \
     libzip-dev \
+    libicu63 \
+    tidy \
     libjpeg62-turbo \
-    libicu57 \
     libpng16-16 \
     libxml2 \
     libcurl4-openssl-dev \
     libldap2-dev \
     libbz2-1.0 \
-    libtidy5 \
     sqlite3 \
     git \
     && apt install -y \
@@ -35,16 +35,13 @@ RUN apt update && apt install -y \
         libxml2-dev \
         libldap2-dev \
         libbz2-dev \ 
-        libtidy-dev \
     && apt purge -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-	    libicu-dev \
         libpng12-dev \
         libxml2-dev \
         libldap2-dev \
         libbz2-dev \
-        libtidy-dev \
     && apt clean
     RUN pecl install xdebug && \
     docker-php-ext-enable xdebug && \

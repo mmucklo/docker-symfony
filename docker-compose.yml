@@ -10,6 +10,9 @@ services:
             - POSTGRES_DB=${POSTGRES_DB}
     mysql:
         image: mysql:8.0
+        command:
+            - mysqld
+            - "--default-authentication-plugin=mysql_native_password"
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_DATABASE=${MYSQL_DATABASE}
