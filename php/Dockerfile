@@ -12,6 +12,7 @@ RUN apt update && apt install -y \
     libbz2-1.0 \
     sqlite3 \
     git \
+    locales \
     && apt install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -25,10 +26,9 @@ RUN apt update && apt install -y \
 	libsqlite3-dev \
     && docker-php-ext-install -j$(nproc) dom iconv gettext mysqli bz2 fileinfo hash pcntl shmop intl json bcmath mbstring posix tokenizer opcache simplexml xmlrpc xmlrpc xml curl zip soap pdo pdo_mysql pdo_pgsql pdo_sqlite pgsql session sockets sysvmsg sysvsem sysvshm tidy wddx \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd ldap \
     && apt remove -y \
-        libfreetype6-dev \
         libjpeg62-turbo-dev \
         libicu-dev \
         libpng-dev \
@@ -36,7 +36,6 @@ RUN apt update && apt install -y \
         libldap2-dev \
         libbz2-dev \ 
     && apt purge -y \
-        libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng12-dev \
         libxml2-dev \
@@ -60,6 +59,7 @@ RUN apt update && apt install -y \
     apt remove -y libssl-dev && \
     apt autoremove -y && \
     apt clean
+RUN locale-gen de_DE && locale-gen de_DE.UTF-8
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN curl --url https://getcomposer.org/composer.phar -o /usr/local/bin/composer.phar && chmod a+x /usr/local/bin/composer.phar
 ARG XDEBUG_REMOTE_HOST=localhost
