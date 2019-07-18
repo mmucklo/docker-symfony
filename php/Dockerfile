@@ -66,6 +66,7 @@ COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN curl --url https://getcomposer.org/composer.phar -o /usr/local/bin/composer.phar && chmod a+x /usr/local/bin/composer.phar
 RUN apt install wget
 RUN wget https://get.symfony.com/cli/installer -O - | bash
+RUN ln -s /root/.symfony/bin/symfony /usr/local/bin/.
 ARG XDEBUG_REMOTE_HOST=localhost
 RUN echo xdebug.remote_host=${XDEBUG_REMOTE_HOST} >> /usr/local/etc/php/conf.d/xdebug.ini
 RUN composer.phar self-update
