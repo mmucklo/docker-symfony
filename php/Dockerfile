@@ -59,9 +59,13 @@ RUN apt update && apt install -y \
     apt remove -y libssl-dev && \
     apt autoremove -y && \
     apt clean
-RUN locale-gen de_DE && locale-gen de_DE.UTF-8
+RUN sed -i 's/# de_DE/de_DE/g' /etc/locale.gen
+RUN sed -i 's/# en_US/en_US/g' /etc/locale.gen
+RUN locale-gen 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN curl --url https://getcomposer.org/composer.phar -o /usr/local/bin/composer.phar && chmod a+x /usr/local/bin/composer.phar
+RUN apt install wget
+RUN wget https://get.symfony.com/cli/installer -O - | bash
 ARG XDEBUG_REMOTE_HOST=localhost
 RUN echo xdebug.remote_host=${XDEBUG_REMOTE_HOST} >> /usr/local/etc/php/conf.d/xdebug.ini
 RUN composer.phar self-update
