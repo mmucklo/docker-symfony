@@ -63,10 +63,24 @@ RUN sed -i 's/# de_DE/de_DE/g' /etc/locale.gen
 RUN sed -i 's/# en_US/en_US/g' /etc/locale.gen
 RUN locale-gen 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-RUN curl --url https://getcomposer.org/composer.phar -o /usr/local/bin/composer.phar && chmod a+x /usr/local/bin/composer.phar
+RUN curl --url https://getcomposer.org/composer.phar -o /usr/local/bin/composer && chmod a+x /usr/local/bin/composer
 RUN apt install wget
 RUN wget https://get.symfony.com/cli/installer -O - | bash
 RUN ln -s /root/.symfony/bin/symfony /usr/local/bin/.
 ARG XDEBUG_REMOTE_HOST=localhost
 RUN echo xdebug.remote_host=${XDEBUG_REMOTE_HOST} >> /usr/local/etc/php/conf.d/xdebug.ini
-RUN composer.phar self-update
+RUN composer self-update
+RUN cd /var/www && symfony new --full --no-git symfony
+RUN cd /var/www/symfony && composer require symfony/orm-pack && composer require --dev symfony/maker-bundle
+RUN cd /var/www/symfony && sed -i 's/DATABASE_URL/# DATABASE_URL/g' .env
+RUN cd /var/www/symfony && echo 'DATABASE_URL="mysqli://doctrine:doctrine@mysql:3306/doctrine"' >> .env
+COPY setlocale.php /var/www/symfony
+RUN mkdir -p /var/www/symfony/src/Entity
+COPY GrumpyPuppy.php /var/www/symfony/src/Entity/GrumpyPuppy.php
+RUN mkdir -p /var/www/symfony/src/Command
+COPY GrumpyPuppyCommand.php /var/www/symfony/src/Command/GrumpyPuppyCommand.php
+RUN mkdir -p /var/www/symfony/src/Repository
+COPY GrumpyPuppyRepository.php /var/www/symfony/src/Repository/GrumpyPuppyRepository.php
+RUN mkdir -p /var/www/symfony/src/Migrations
+COPY Version20190719053443.php /var/www/symfony/src/Migrations/Version20190719053443.php
+RUN mv /var/www/symfony /var/www/symfony.new
