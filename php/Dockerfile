@@ -117,6 +117,7 @@ RUN sed -i 's/# en_US/en_US/g' /etc/locale.gen
 RUN locale-gen 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN curl -L --url https://getcomposer.org/composer.phar -o /usr/local/bin/composer.phar && chmod a+x /usr/local/bin/composer.phar
+RUN ln -s /usr/local/bin/composer.phar /usr/local/bin/composer
 RUN apt install wget
 RUN wget https://get.symfony.com/cli/installer -O - | bash
 RUN ln -s /root/.symfony/bin/symfony /usr/local/bin/.
